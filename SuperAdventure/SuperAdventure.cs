@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using Engine;
+
 
 namespace SuperAdventure
 {
@@ -15,15 +17,22 @@ namespace SuperAdventure
     {
         private Player _player;   // Variabel Player aus Engine wird genutztas
         private Monster _currentMonster;
+        private const string PLAYER_DATA_FILE_NAME = "PlayerData.xml";
 
         public SuperAdventure()
         {
             InitializeComponent();
 
-            _player = new Player(20, 0, 10, 10);     // Player Object wird der privaten Variabel zugewiesen und Parameter an unseren KOnstruktor übergeben
-            MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
-            _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));         //Der Inventar Liste wird ein InventoryItem hinzugefügt mit der Wrapper Methode ItemByID aus World und dann Die Konstante ID des rusty sword =1
+            if (File.Exists(PLAYER_DATA_FILE_NAME))
+            {
+                _player = Player.CreatePlayerFromXmlString(File.ReadAllText(PLAYER_DATA_FILE_NAME));
+            }
+            else
+            {
+                _player = Player.CreateDefaultPlayer();
+            }
 
+            MoveTo(_player.CurrentLocation);
             UpdatePlayerStats();
 
         }
@@ -500,6 +509,11 @@ namespace SuperAdventure
             lblGold.Text = _player.Gold.ToString();
             lblExperience.Text = _player.ExperiencePoints.ToString();
             lblLevel.Text = _player.Level.ToString();
+        }
+
+        private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, _player.ToXmlString());
         }
     }
 }
