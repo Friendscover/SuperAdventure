@@ -20,14 +20,11 @@ namespace SuperAdventure
         {
             InitializeComponent();
 
-            _player = new Player(20, 0, 1, 10, 10);     // Player Object wird der privaten Variabel zugewiesen und Parameter an unseren KOnstruktor übergeben
+            _player = new Player(20, 0, 10, 10);     // Player Object wird der privaten Variabel zugewiesen und Parameter an unseren KOnstruktor übergeben
             MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
             _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));         //Der Inventar Liste wird ein InventoryItem hinzugefügt mit der Wrapper Methode ItemByID aus World und dann Die Konstante ID des rusty sword =1
-           
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-            lblGold.Text = _player.Gold.ToString();
-            lblExperience.Text = _player.ExperiencePoints.ToString();
-            lblLevel.Text = _player.Level.ToString();
+
+            UpdatePlayerStats();
 
         }
 
@@ -384,10 +381,7 @@ namespace SuperAdventure
                 ScrollToBottomOfMessages();
 
                 //Refresh player information and inventory controls
-                lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-                lblGold.Text = _player.Gold.ToString();
-                lblExperience.Text = _player.ExperiencePoints.ToString();
-                lblLevel.Text = _player.Level.ToString();
+                UpdatePlayerStats();
 
                 UpdateInventoryListInUI();
                 UpdateWeaponListInUI();
@@ -499,5 +493,13 @@ namespace SuperAdventure
             rtbMessages.ScrollToCaret();
         }
         
+        private void UpdatePlayerStats()
+        {
+            //Refresh player information and inventory controls
+            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            lblGold.Text = _player.Gold.ToString();
+            lblExperience.Text = _player.ExperiencePoints.ToString();
+            lblLevel.Text = _player.Level.ToString();
+        }
     }
 }

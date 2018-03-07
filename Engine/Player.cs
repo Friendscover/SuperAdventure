@@ -8,7 +8,11 @@ namespace Engine
     {
         public int Gold { get; set; }
         public int ExperiencePoints { get; set; }
-        public int Level { get; set; }
+        public int Level
+        {
+            get { return ((ExperiencePoints / 100) + 1); }      //Der Value für Exp wird durch 100 geteilt und damit unserer Level angezeigt
+        }
+        
 
         public Location CurrentLocation { get; set; }
 
@@ -17,11 +21,10 @@ namespace Engine
 
 
 
-        public Player(int gold, int experiencePoints, int level, int currentHitPoints, int maximumHitPoints) : base(currentHitPoints, maximumHitPoints)
+        public Player(int gold, int experiencePoints, int currentHitPoints, int maximumHitPoints) : base(currentHitPoints, maximumHitPoints)
         {
             Gold = gold;
             ExperiencePoints = experiencePoints;
-            Level = level;
             Inventory = new List<InventoryItem>();
             Quests = new List<PlayerQuest>();
         }
