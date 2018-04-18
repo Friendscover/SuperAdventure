@@ -4,6 +4,8 @@ using System.Text;
 using System.Linq;
 using System.Xml;
 using System.ComponentModel;
+using System.Threading.Tasks;
+
 
 namespace Engine
 {
@@ -44,25 +46,33 @@ namespace Engine
         
         public Weapon CurrentWeapon { get; set; }
 
-        public BindingList<InventoryItem> Inventory { get; set; }          //erzeugt eine List von Inventory Items die Inventar genannt wird , siehe Inventory Item
-        public BindingList<PlayerQuest> Quests { get; set; }
+        public BindingList<InventoryItem> Inventory { get; set; }
 
         //Neue List und dann wird mit LinQ das Inventar durchsucht (for each Item (In diesem Fall Weapon) im Inventar) 
         //und nur der Das Detail wird als Waffe zur List hinzugefügt
-
         public List<Weapon> Weapons
         {
-            get { return Inventory.Where(
-                x => x.Details is Weapon).Select(
-                x => x.Details as Weapon).ToList(); }
+            get
+            {
+                return Inventory.Where(
+              x => x.Details is Weapon).Select(
+              x => x.Details as Weapon).ToList();
+            }
         }
 
         public List<HealingPotion> Potions
         {
-            get { return Inventory.Where(
-                x => x.Details is HealingPotion).Select(
-                x => x.Details as HealingPotion).ToList(); }
+            get
+            {
+                return Inventory.Where(
+              x => x.Details is HealingPotion).Select(
+              x => x.Details as HealingPotion).ToList();
+            }
         }
+
+                //erzeugt eine List von Inventory Items die Inventar genannt wird , siehe Inventory Item
+        public BindingList<PlayerQuest> Quests { get; set; }
+
 
         public Location CurrentLocation
         {
@@ -100,7 +110,7 @@ namespace Engine
         }
 
         //Funktion zum Update Des UI bei Änderung des Weapons/Potions
-        public void RaiseInventoryChangedEvent(Item item)
+        private void RaiseInventoryChangedEvent(Item item)
         {
             if(item is Weapon)
             {
@@ -109,7 +119,7 @@ namespace Engine
             
             if(item is HealingPotion)
             {
-                OnPropertyChanged("HealingPotion");
+                OnPropertyChanged("Potions");
             }
         }
 
