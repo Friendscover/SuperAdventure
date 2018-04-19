@@ -108,6 +108,11 @@ namespace Engine
 
             Location townSquare = new Location(LOCATION_ID_TOWN_SQUARE, "Town square", "You see a fountain");
 
+            Vendor bobTheRatCatcher = new Vendor("Bob the Rat-Catcher");
+
+            bobTheRatCatcher.AddItemToInventory(ItemByID(ITEM_ID_PIECE_OF_FUR), 5);
+            bobTheRatCatcher.AddItemToInventory(ItemByID(ITEM_ID_RAT_TAIL), 3);
+
             Location alchemistHut = new Location(LOCATION_ID_ALCHEMIST_HUT, "Alchemist Hut", "There are many strange plants on the shelves");
                 alchemistHut.QuestAvailableHere = QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN);
 
