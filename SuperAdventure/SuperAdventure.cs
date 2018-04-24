@@ -138,6 +138,10 @@ namespace SuperAdventure
             _player.UsePotion(potion);
         }
         
+        private void btnTrade_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
         {
