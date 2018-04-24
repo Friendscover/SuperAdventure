@@ -112,6 +112,9 @@ namespace Engine
 
             bobTheRatCatcher.AddItemToInventory(ItemByID(ITEM_ID_PIECE_OF_FUR), 5);
             bobTheRatCatcher.AddItemToInventory(ItemByID(ITEM_ID_RAT_TAIL), 3);
+            bobTheRatCatcher.AddItemToInventory(ItemByID(ITEM_ID_LONG_SWORD), 1);
+
+            townSquare.VendorWorkingHere = bobTheRatCatcher;
 
             Location alchemistHut = new Location(LOCATION_ID_ALCHEMIST_HUT, "Alchemist Hut", "There are many strange plants on the shelves");
                 alchemistHut.QuestAvailableHere = QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN);

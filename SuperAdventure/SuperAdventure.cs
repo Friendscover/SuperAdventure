@@ -140,7 +140,9 @@ namespace SuperAdventure
         
         private void btnTrade_Click(object sender, EventArgs e)
         {
-
+            TradingScreen tradingScreen = new TradingScreen(_player);   //dem CurrentPlayerObject im Trading Screen wird unser Player zugewiesen aber es wird kein 2. Player erzeugt
+            tradingScreen.StartPosition = FormStartPosition.CenterParent;
+            tradingScreen.ShowDialog(this); // Show Dialog lässt den Trading Screen sich selbst zeigen
         }
 
         private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
@@ -197,6 +199,7 @@ namespace SuperAdventure
                 btnEast.Visible = (_player.CurrentLocation.LocationToEast != null);
                 btnSouth.Visible = (_player.CurrentLocation.LocationToSouth != null);
                 btnWest.Visible = (_player.CurrentLocation.LocationToWest != null);
+                btnTrade.Visible = (_player.CurrentLocation.VendorWorkingHere != null);
 
                 //Display current location name and description
                 rtbLocation.Text = _player.CurrentLocation.Name + Environment.NewLine;
