@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Engine
 {
-    public class MessageEventArgs :EventArgs
+    public class MessageEventArgs : EventArgs
     {
         public string Message { get; set; }
         public bool AddExtraNewLine { get; set; }
